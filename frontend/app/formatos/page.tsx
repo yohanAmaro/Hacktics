@@ -11,7 +11,7 @@ import { ArrowRight, FileText } from 'lucide-react';
 export default function Formatos() {
   const router = useRouter();
   const { user, loading: authLoading } = useAuth();
-  const { formats, loading } = useFormats();
+  const { formats = [], loading } = useFormats();
 
   useEffect(() => {
     if (!authLoading && !user) {

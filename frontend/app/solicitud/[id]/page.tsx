@@ -10,15 +10,15 @@ import { ApprovalTimeline } from '@/components/ApprovalTimeline';
 import { api } from '@/lib/api';
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
-import { Download, CheckCircle, XCircle } from 'lucide-react';
+import { Download } from 'lucide-react';
 
 export default function DetalleSolicitud() {
   const router = useRouter();
   const params = useParams();
   const requestId = params.id as string;
   const { user, loading: authLoading } = useAuth();
-  const { request, loading: requestLoading } = useRequest(requestId);
-  const { approvals, loading: approvalsLoading } = useRequestApprovals(requestId);
+  const { request = { id: '', status: '', created_at: '', updated_at: '' }, loading: requestLoading } = useRequest(requestId);
+  const { approvals = [], loading: approvalsLoading } = useRequestApprovals(requestId);
   const [generatingPdf, setGeneratingPdf] = useState(false);
   const [pdfUrl, setPdfUrl] = useState<string | null>(null);
 
@@ -32,8 +32,8 @@ export default function DetalleSolicitud() {
     setGeneratingPdf(true);
     try {
       const response = await api.post(`/requests/${requestId}/documents`, {});
-      if (response.success && response.data?.pdf_url) {
-        setPdfUrl(response.data.pdf_url);
+      if (response.success && (response as any).data?.pdf_url) {
+        setPdfUrl((response as any).data.pdf_url);
         alert('PDF generado exitosamente');
       } else {
         alert(`Error: ${response.error}`);

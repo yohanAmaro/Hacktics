@@ -12,7 +12,7 @@ interface RequestDetailProps {
   schema?: any;
 }
 
-export function RequestDetail({ data, schema }: RequestDetailProps) {
+export function RequestDetail({ data }: RequestDetailProps) {
   const [expandedSections, setExpandedSections] = React.useState<
     Record<string, boolean>
   >({});

@@ -6,7 +6,6 @@ import { useAuth } from '@/hooks/useAuth';
 import { Header } from '@/components/Header';
 import { useRequests } from '@/hooks/useApi';
 import { RequestTable } from '@/components/RequestTable';
-import { Badge } from '@/components/ui/Badge';
 import { useState } from 'react';
 
 export default function MisSolicitudes() {

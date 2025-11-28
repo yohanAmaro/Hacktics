@@ -13,7 +13,7 @@ export default function Dashboard() {
   const router = useRouter();
   const { user, loading: authLoading } = useAuth();
   const { requests, loading: requestsLoading } = useRequests();
-  const { formats } = useFormats();
+  useFormats();
 
   useEffect(() => {
     if (!authLoading && !user) {

@@ -5,11 +5,11 @@ import { api } from '@/lib/api';
 
 export function useFormats() {
   const { data, error, isLoading } = useSWR('/formats', () =>
-    api.get('/formats').then((res) => (res.success ? res.data : null))
+    api.get('/formats').then((res) => (res.success ? res.data : []))
   );
 
   return {
-    formats: data || [],
+    formats: (data as any) || [],
     loading: isLoading,
     error,
   };
@@ -33,8 +33,8 @@ export function useRequests(filters?: { status?: string; format_id?: string }) {
   );
 
   return {
-    requests: data?.data || [],
-    total: data?.total || 0,
+    requests: (data as any)?.data || [],
+    total: (data as any)?.total || 0,
     loading: isLoading,
     error,
     mutate,
@@ -44,11 +44,11 @@ export function useRequests(filters?: { status?: string; format_id?: string }) {
 export function useRequest(id: string | null) {
   const { data, error, isLoading, mutate } = useSWR(
     id ? `/requests/${id}` : null,
-    () => api.get(`/requests/${id}`).then((res) => (res.success ? res.data : null))
+    () => api.get(`/requests/${id}`).then((res) => (res.success ? res.data : {}))
   );
 
   return {
-    request: data,
+    request: (data as any) || {},
     loading: isLoading,
     error,
     mutate,
@@ -65,7 +65,7 @@ export function useRequestApprovals(requestId: string | null) {
   );
 
   return {
-    approvals: data || [],
+    approvals: (data as any) || [],
     loading: isLoading,
     error,
   };
@@ -77,7 +77,7 @@ export function usePendingApprovals() {
   );
 
   return {
-    approvals: data || [],
+    approvals: (data as any) || [],
     loading: isLoading,
     error,
     mutate,

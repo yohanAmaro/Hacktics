@@ -2,8 +2,6 @@
 
 import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
 
 interface FormField {
   id: string;
@@ -145,7 +143,7 @@ function FormField({ field, control, errors, watch }: any) {
   );
 }
 
-function RepeaterField({ field, control, errors, watch }: any) {
+function RepeaterField({ field, control, watch }: any) {
   const items = watch(field.id) || [];
   const [items2, setItems] = useState<any[]>(items);
 

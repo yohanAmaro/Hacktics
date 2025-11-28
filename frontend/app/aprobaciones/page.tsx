@@ -6,7 +6,6 @@ import { useAuth } from '@/hooks/useAuth';
 import { Header } from '@/components/Header';
 import { usePendingApprovals } from '@/hooks/useApi';
 import { Badge } from '@/components/ui/Badge';
-import { Button } from '@/components/ui/Button';
 import { CheckCircle, XCircle, FileText } from 'lucide-react';
 import { useState } from 'react';
 import { api } from '@/lib/api';
@@ -15,7 +14,7 @@ import { SignaturePad } from '@/components/SignaturePad';
 export default function Aprobaciones() {
   const router = useRouter();
   const { user, loading: authLoading } = useAuth();
-  const { approvals, loading: approvalsLoading, mutate } = usePendingApprovals();
+  const { approvals = [], loading: approvalsLoading, mutate } = usePendingApprovals();
 
   const [selectedApproval, setSelectedApproval] = useState<any>(null);
   const [comment, setComment] = useState('');

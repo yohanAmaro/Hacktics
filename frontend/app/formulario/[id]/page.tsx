@@ -7,14 +7,13 @@ import { Header } from '@/components/Header';
 import { useFormats } from '@/hooks/useApi';
 import { api } from '@/lib/api';
 import { FormBuilder } from '@/components/FormBuilder';
-import { Button } from '@/components/ui/Button';
 
 export default function FormularioDinamico() {
   const router = useRouter();
   const params = useParams();
   const formatId = params.id as string;
   const { user, loading: authLoading } = useAuth();
-  const { formats, loading: formatsLoading } = useFormats();
+  const { formats = [], loading: formatsLoading } = useFormats();
 
   const [formData, setFormData] = useState<any>(null);
   const [saving, setSaving] = useState(false);
